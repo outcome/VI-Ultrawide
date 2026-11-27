@@ -1,8 +1,10 @@
-# GTA VI ultrawide for VIctory
+# VI-Ultrawide
 
-A drop-in `dxgi.dll` that adds resolution, ultrawide, borderless fullscreen and FOV options to GTA VI (v1.0.2.1) running under [VIctory](https://github.com/Marvisak/VIctory). It works on any VIctory build or fork and changes nothing in VIctory itself.
+A drop-in `dxgi.dll` that adds resolution, ultrawide, borderless fullscreen and FOV options to GTA VI (v1.0.2.1). It is designed for [VIctory](https://github.com/Marvisak/VIctory) and its forks and changes nothing in VIctory itself. It has only been tested on the forks listed under Tested on.
 
 ![3440x1440 borderless](docs/3440x1440.png)
+
+*Placeholder screenshot (3440x1440, borderless); I'll replace it with a better one later.*
 
 ## Features
 
@@ -13,6 +15,15 @@ A drop-in `dxgi.dll` that adds resolution, ultrawide, borderless fullscreen and 
 - **Opt-in**: every option is empty by default and an empty option does nothing, so the shipped config leaves the game exactly as VIctory runs it.
 - **Safe**: the ini is created once and never overwritten, unknown keys are ignored, and the dll checks every byte it patches. A different game build or an already-patched exe is left alone.
 - **Read-only game folders work**: if the game dir can't be written (for example victory-proton), the dll patches the game in memory instead of the exe.
+
+## Tested on
+
+| Fork | Result |
+|---|---|
+| [avatarmanz/VIctory-7900XTX](https://github.com/avatarmanz/VIctory-7900XTX) (via victory-proton, Linux/Proton) | 3440x1440, borderless: works |
+| [kroeeee-eeee/VIctory-Linux-Proton-Wine-7900XT-XTX](https://github.com/kroeeee-eeee/VIctory-Linux-Proton-Wine-7900XT-XTX) (via victory-proton) | resolution and FOV patches apply, game runs |
+
+Not tested on Windows, or on any other fork.
 
 ## Install
 
@@ -38,6 +49,14 @@ To uninstall, delete `dxgi.dll` (and restore `game_scarlett_master.exe` from `ga
 - Keyboard and mouse don't work in the UI on at least one fork; use a controller there.
 - Works only on GTA VI v1.0.2.1.
 - The game is slow on Linux while shaders warm up (the first minutes), independent of this mod.
+
+## To-Do
+
+- Toggleable black bars
+- Scalable UI (`ui_scale`)
+- Scale to fit (a smaller resolution fitted inside the window without stretching)
+- Fix the stretched title cards and intro cutscene on ultrawide
+- Test on more forks and on Windows
 
 ## Build
 
