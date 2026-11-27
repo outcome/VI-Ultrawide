@@ -47,11 +47,9 @@ To uninstall, delete `dxgi.dll` (and restore `game_scarlett_master.exe` from `ga
 ## Known issues
 
 - On screens wider than 16:9, some UI is stretched horizontally (chapter titles, the "Just Like Paradise" title) and the intro cutscene is stretched.
-- The intro cutscene can jitter on some forks (seen on the 7900XTX fork; not tied to this mod).
+- The intro cutscene can jitter on some forks (seen on the 7900XTX fork).
 - No `ui_scale`, no black-bar option and no scale-to-fit yet (see `archive/` for the abandoned smart-scaling attempt and why).
-- Keyboard and mouse don't work in the UI on at least one fork; use a controller there.
 - Works only on GTA VI v1.0.2.1.
-- The game is slow on Linux while shaders warm up (the first minutes), independent of this mod.
 
 ## To-Do
 
