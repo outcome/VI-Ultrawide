@@ -2,9 +2,12 @@
 
 A drop-in `dxgi.dll` that adds resolution, ultrawide, borderless fullscreen and FOV options to GTA VI (v1.0.2.1). It is designed for [VIctory](https://github.com/Marvisak/VIctory) and its forks and changes nothing in VIctory itself. It has only been tested on the forks listed under Tested on.
 
-![3440x1440 borderless](docs/3440x1440.png)
+<p align="center">
+  <img src="docs/3440x1440.png" width="49%" alt="3440x1440 borderless, in game">
+  <img src="docs/3440x1440-2.png" width="49%" alt="3440x1440 borderless, pause menu map">
+</p>
 
-*Placeholder screenshot (3440x1440, borderless); I'll replace it with a better one later.*
+*Placeholder screenshots (3440x1440, borderless); I'll replace it with a better one later.*
 
 ## Features
 
