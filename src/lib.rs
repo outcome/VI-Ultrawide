@@ -25,7 +25,7 @@ pub unsafe extern "system" fn DllMain(_h: *mut c_void, reason: u32, _r: *mut c_v
         }
         if patches::wanted(&o) {
             set_env("VICTORY_NO_UW", "1"); // a build with its own ultrawide module stands aside
-            if !patches::patch_exe(&o) {
+            if !(o.patch_exe && patches::patch_exe(&o)) {
                 let o2 = o.clone();
                 std::thread::spawn(move || patches::memory_patcher(o2));
             }

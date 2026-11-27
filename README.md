@@ -31,7 +31,7 @@ Currently untested on other forks.
 
 ## Install
 
-1. Copy `dxgi.dll` next to `victory.exe`.
+1. Copy `dxgi.dll` next to VIctory's own `victory.exe` (the launcher you run, not the game's `game_scarlett_master.exe`).
 2. Linux/Proton only: add `dxgi=n,b` to `WINEDLLOVERRIDES`. Windows needs nothing.
 3. Start the game. `uw-options.ini` is created next to the dll; edit it and restart.
 
@@ -44,6 +44,7 @@ To uninstall, delete `dxgi.dll` (and restore `game_scarlett_master.exe` from `ga
 | `res_x`, `res_y` | pixels; set both or neither | output resolution |
 | `borderless_fullscreen` | `true` / `false` | borderless window over the monitor; a different aspect than the monitor stretches |
 | `fov_scale` | 0.5 - 2 | camera FOV multiplier |
+| `patch_mode` | `memory` (default) / `exe` | `memory` leaves the game file untouched (works with other tools such as foxhound and read-only folders); `exe` edits the game file on disk, keeping a `.bak-uw` backup |
 
 ## Known issues
 

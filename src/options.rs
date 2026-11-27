@@ -13,6 +13,10 @@ res_y =
 // A borderless window covering the monitor: true or false. Empty = false.
 borderless_fullscreen =
 
+// How the game is patched: memory (default, the game file is never changed, works with other tools and
+// read-only folders) or exe (edits the game file on disk, keeping a .bak-uw backup). Empty = memory.
+patch_mode =
+
 // Field of view multiplier: 1.2 = 20% wider, 0.8 = 20% narrower (0.5 - 2). Empty = unchanged.
 fov_scale =
 ";
@@ -22,6 +26,7 @@ pub struct Options {
     pub res: Option<(u32, u32)>,
     pub fov: Option<f64>,
     pub borderless: bool,
+    pub patch_exe: bool,
 }
 
 /// `key = value` lines; `//`, `;` and `#` start a comment. Unknown keys are ignored.
@@ -67,7 +72,8 @@ fn parse(text: &str) -> Options {
     };
     let borderless = matches!(value(text, "borderless_fullscreen").as_deref().map(str::to_ascii_lowercase).as_deref(), Some("true" | "1" | "yes" | "on"));
     let fov = number(text, "fov_scale", 0.5, 2.0).filter(|f| (f - 1.0).abs() > 1e-6);
-    Options { res, fov, borderless }
+    let patch_exe = value(text, "patch_mode").is_some_and(|m| m.eq_ignore_ascii_case("exe"));
+    Options { res, fov, borderless, patch_exe }
 }
 
 #[cfg(test)]
@@ -77,15 +83,16 @@ mod tests {
     #[test]
     fn the_shipped_text_changes_nothing() {
         let o = parse(INI_TEXT);
-        assert!(o.res.is_none() && o.fov.is_none() && !o.borderless);
+        assert!(o.res.is_none() && o.fov.is_none() && !o.borderless && !o.patch_exe);
     }
 
     #[test]
     fn values_are_read_checked_and_unknown_keys_ignored() {
-        let o = parse("res_x = 3440 // wide\nres_y=1440\nborderless_fullscreen = true\nfov_scale = 1.2\nsmart_scaling = true\n");
+        let o = parse("res_x = 3440 // wide\nres_y=1440\nborderless_fullscreen = true\nfov_scale = 1.2\npatch_mode = EXE\nsmart_scaling = true\n");
         assert_eq!(o.res, Some((3440, 1440)));
         assert!(o.borderless);
         assert_eq!(o.fov, Some(1.2));
+        assert!(o.patch_exe);
         assert!(parse("res_x = 3440\n").res.is_none(), "both or neither");
         assert!(parse("res_x = 10\nres_y = 10\n").res.is_none(), "out of range");
         assert!(parse("fov_scale = 1\n").fov.is_none(), "1 is no change");
