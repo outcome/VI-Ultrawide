@@ -16,7 +16,7 @@ A drop-in `dxgi.dll` that adds resolution, ultrawide, borderless fullscreen and 
 - **Borderless fullscreen** (`borderless_fullscreen`): a borderless window covering the monitor, on Linux and Windows.
 - **FOV scale** (`fov_scale`): multiplies the camera field of view (1.2 = 20% wider).
 - **Opt-in**: every option is empty by default and an empty option does nothing, so the shipped config leaves the game exactly as VIctory runs it.
-- **Safe**: the ini is created once and never overwritten, unknown keys are ignored, and the dll checks every byte it patches. A different game build or an already-patched exe is left alone.
+- **Safe**: the ini is created once, never overwritten (a new version only appends options your file lacks, with their comments), and unknown keys are ignored, and the dll checks every byte it patches. A different game build or an already-patched exe is left alone.
 - **Read-only game folders work**: if the game dir can't be written (for example victory-proton), the dll patches the game in memory instead of the exe.
 
 ## Tested on
