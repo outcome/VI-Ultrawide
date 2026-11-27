@@ -25,8 +25,9 @@ A drop-in `dxgi.dll` that adds resolution, ultrawide, borderless fullscreen and 
 |---|---|
 | [avatarmanz/VIctory-7900XTX](https://github.com/avatarmanz/VIctory-7900XTX) (via victory-proton, Linux/Proton) | 3440x1440, borderless: works |
 | [kroeeee-eeee/VIctory-Linux-Proton-Wine-7900XT-XTX](https://github.com/kroeeee-eeee/VIctory-Linux-Proton-Wine-7900XT-XTX) (via victory-proton) | resolution and FOV patches apply, game runs |
+| foxhound fork (Windows, NVIDIA RTX 5090) | works (reported by a user, not tested by me) |
 
-Not tested on Windows, or on any other fork.
+Not tested by me on Windows or on any other fork.
 
 ## Install
 
