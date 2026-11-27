@@ -7,7 +7,7 @@ A drop-in `dxgi.dll` that adds resolution, ultrawide, borderless fullscreen and 
   <img src="docs/3440x1440-2.png" width="49%" alt="3440x1440 borderless, pause menu map">
 </p>
 
-*Placeholder screenshots (3440x1440, borderless); I'll replace it with a better one later.*
+*Placeholder screenshots (3440x1440, borderless); I'll replace them later.*
 
 ## Features
 
