@@ -5,14 +5,17 @@ use std::path::PathBuf;
 
 pub type Hwnd = *mut c_void;
 #[repr(C)] #[derive(Clone, Copy, Default)] pub struct Rect { pub l: i32, pub t: i32, pub r: i32, pub b: i32 }
+#[repr(C)] pub struct Msg { pub hwnd: Hwnd, pub message: u32, pub wparam: usize, pub lparam: isize, pub time: u32, pub pt: [i32; 2] }
 #[repr(C)] pub struct MonitorInfo { pub size: u32, pub monitor: Rect, pub work: Rect, pub flags: u32 }
 unsafe extern "system" {
     pub fn LoadLibraryW(name: *const u16) -> *mut c_void;
     pub fn GetProcAddress(m: *mut c_void, name: *const u8) -> *mut c_void;
+    pub fn GetModuleHandleW(name: *const u16) -> *mut c_void;
     pub fn GetModuleHandleExW(flags: u32, addr: *const c_void, out: *mut *mut c_void) -> i32;
     pub fn GetSystemDirectoryW(buf: *mut u16, n: u32) -> u32;
     pub fn GetModuleFileNameW(m: *mut c_void, buf: *mut u16, n: u32) -> u32;
     pub fn SetEnvironmentVariableW(k: *const u16, v: *const u16) -> i32;
+    pub fn VirtualAlloc(addr: *mut c_void, size: usize, ty: u32, protect: u32) -> *mut c_void;
     pub fn VirtualProtect(addr: *mut c_void, size: usize, new: u32, old: *mut u32) -> i32;
     pub fn GetCurrentProcessId() -> u32;
     pub fn EnumWindows(f: unsafe extern "system" fn(Hwnd, isize) -> i32, l: isize) -> i32;
@@ -25,6 +28,13 @@ unsafe extern "system" {
     pub fn SetWindowPos(h: Hwnd, after: Hwnd, x: i32, y: i32, w: i32, hh: i32, flags: u32) -> i32;
     pub fn MonitorFromWindow(h: Hwnd, flags: u32) -> *mut c_void;
     pub fn GetMonitorInfoW(m: *mut c_void, info: *mut MonitorInfo) -> i32;
+    pub fn GetForegroundWindow() -> Hwnd;
+    pub fn GetSystemMetrics(i: i32) -> i32;
+    pub fn ShowWindow(h: Hwnd, cmd: i32) -> i32;
+    pub fn CreateWindowExW(ex: u32, class: *const u16, title: *const u16, style: u32, x: i32, y: i32, w: i32, h: i32, parent: Hwnd, menu: *mut c_void, inst: *mut c_void, param: *mut c_void) -> Hwnd;
+    pub fn PeekMessageW(m: *mut Msg, h: Hwnd, min: u32, max: u32, remove: u32) -> i32;
+    pub fn TranslateMessage(m: *const Msg) -> i32;
+    pub fn DispatchMessageW(m: *const Msg) -> isize;
 }
 
 
