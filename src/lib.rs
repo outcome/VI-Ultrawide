@@ -6,6 +6,7 @@ mod options;
 mod patches;
 mod proxy;
 mod sys;
+mod vpad;
 mod window;
 
 use std::ffi::c_void;
@@ -19,19 +20,20 @@ fn set_env(k: &str, v: &str) {
 #[unsafe(no_mangle)]
 pub unsafe extern "system" fn DllMain(_h: *mut c_void, reason: u32, _r: *mut c_void) -> i32 {
     if reason == 1 {
+        std::thread::spawn(vpad::install);
+        patches::restore_exe();
         let o = options::options();
         if let Some((w, h)) = o.res {
             set_env("VICTORY_DISPLAY_MODE", &format!("{w}x{h}")); // read by VIctory forks that have a display mode
         }
         if patches::wanted(&o) {
             set_env("VICTORY_NO_UW", "1"); // a build with its own ultrawide module stands aside
-            if !(o.patch_exe && patches::patch_exe(&o)) {
-                let o2 = o.clone();
-                std::thread::spawn(move || patches::memory_patcher(o2));
-            }
+            let o2 = o.clone();
+            std::thread::spawn(move || patches::memory_patcher(o2));
         }
-        if o.borderless {
-            std::thread::spawn(window::borderless_watcher);
+        if o.borderless != options::Borderless::Off {
+            let (mode, res) = (o.borderless, o.res);
+            std::thread::spawn(move || window::borderless_watcher(mode, res));
         }
     }
     1

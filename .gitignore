@@ -1,2 +1,7 @@
-target/
-release/dxgi.dll
+# Build output
+/target/
+/release/
+
+# Local work, not part of the mod: research notes, screenshots, saves
+/notes/
+/saves/
